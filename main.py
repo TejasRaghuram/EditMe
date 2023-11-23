@@ -19,4 +19,4 @@ pages = {
     'login': login,
 }
 
-Gui(pages=pages).run(dark_mode=True)
+Gui(pages=pages, css_file="./styles.css").run(dark_mode=True)
