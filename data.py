@@ -1,5 +1,7 @@
 import json
 
+# TODO: Implement mongoDB
+# TODO: Implement create() function
 
 def get_data():
     """
@@ -15,6 +17,10 @@ def get_data():
         return False
 
     return data
+
+def create():
+    # TODO: 
+    pass
 
 def get_essay(username):
     """
@@ -48,7 +54,7 @@ def pending(email):
     if data == False:
         return False
     if email in data:
-        return data[email]['Pending']
+        return data[email]['Pending Status']
     else:
         return False
 
@@ -98,45 +104,40 @@ def set_pending(email):
         None
     """
     data = get_data()
-    data[email]['Pending'] = True
+    data[email]['Pending Status'] = True
 
     with open('data.json', 'w') as file:
         json.dump(data, file)
 
-# This function checks the database to see if two people are pending, and if they are, assigns them to each other
 def assign():
-    return False
+    needs_review = []  # People needing their essays to be reviewed
+    reviewers = []     # People available to review an essay
+    data = get_data()
 
+    # Identifying people needing review and available reviewers
+    for person in data:
+        if data[person]['Pending Status']:
+            needs_review.append(person)
+        if data[person]['Assigned'] == "":
+            reviewers.append(person)
 
-"""
+    # Check if there are enough reviewers
+    if not reviewers:
+        return False
 
-The methods in this file are to be implemented by Vignesh Saravanakumar
+    # Assign reviewers to people needing review
+    for person in needs_review:
+        for reviewer in reviewers:
+            if person != reviewer:
+                data[person]['Assigned'] = reviewer
+                data[reviewer]['Pending Status'] = False
+                reviewers.remove(reviewer)
+                break
 
-Start by creating a new branch called "data-dev"
-Commit often, and add concise, professional commit messages
-They should have all "important" words capitalized, such as the following:
-"Implemented the getData Function"
-You can see the messages of existing commits for more examples
-
-This application is a platform that allows students to have their college essays peer reviewed
-
-To start, create a MongoDB database to hold the user data
-
-Each user should have the following attributes:
-Email(string storing email)
-Prompt(string storing the prompt the user is writing for)
-Essay(string storing the user's essay)
-Pending(boolean storing whether a user needs to be assigned an essay)
-Assigned(string storing the email of the person the user has been assigned[null if no one])
-
-Specific instructions detailing what each function does can be found above the function
-Delete them after completing the corresponding function
-
-Delete this message after the work is done, just before merging
-
-More functions may or may not need to be added as the project progresses
-If more are needed, you will be contacted
-
-Have fun!
-
-"""
+    # Update data.json with the new assignments
+    try:
+        with open('data.json', 'w') as file:
+            json.dump(data, file, indent=4)
+        return True
+    except IOError:
+        return False
