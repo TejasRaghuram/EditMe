@@ -1,31 +1,91 @@
 import json
 
 
-def get_essay(username):
+def get_data():
+    """
+    Retrieves the data from the data.json file.
+
+    Returns:
+    dict or False: The data if the data.json file exists, False otherwise.
+    """
     try: 
         with open('data.json', 'r') as file:
             data = json.load(file)
     except:
         return False
 
+    return data
+
+def get_essay(username):
+    """
+    Retrieves the essay writing of a given username from the data.json file.
+
+    Parameters:
+    username (str): The username to retrieve the essay writing for.
+
+    Returns:
+    str or False: The essay writing if the username exists in the data.json file, False otherwise.
+    """
+    data = get_data()
+    if data == False:
+        return False
     if username in data:
-        return data[username]['Essay']['writing']
+        return data[username]['Essay']
     else:
         return False
 
-
-# Given an email address, this function returns the user status(pending)
 def pending(email):
-    return False
+    """
+    Retrieves the pending status of a given email from the data.json file.
 
-# Given an email address, this function returns the email of the person assigned to the user
+    Parameters:
+    email (str): The email to retrieve the pending status for.
+
+    Returns:
+    bool or False: The pending status if the email exists in the data.json file, False otherwise.
+    """
+    data = get_data()
+    if data == False:
+        return False
+    if email in data:
+        return data[email]['Pending']
+    else:
+        return False
+
 def get_assigned(email):
-    return ""
+    """
+    Retrieve the assigned value for a given email from the data.
 
-# Given an email and an essay, this function will update the essay that the user currently has
-# This function returns the success of the operation
+    Args:
+        email (str): The email address to retrieve the assigned value for.
+
+    Returns:
+        bool: The assigned value for the given email if it exists in the data, otherwise False.
+    """
+    data = get_data()
+    if data == False:
+        return False
+    if email in data:
+        return data[email]['Assigned']
+    else:
+        return False
+
 def set_essay(email, essay):
-    return False
+    """
+    Set the essay for a given email in the data dictionary and save it to a JSON file.
+
+    Args:
+        email (str): The email address of the user.
+        essay (str): The essay content to be set.
+
+    Returns:
+        None
+    """
+    data = get_data()
+    data[email]['Essay'] = essay
+
+    with open('data.json', 'w') as file:
+        json.dump(data, file)
 
 # Given an email, this function will change their status to pending(set boolean to true)
 # This function returns the success of the operation
