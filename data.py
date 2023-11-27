@@ -87,10 +87,21 @@ def set_essay(email, essay):
     with open('data.json', 'w') as file:
         json.dump(data, file)
 
-# Given an email, this function will change their status to pending(set boolean to true)
-# This function returns the success of the operation
 def set_pending(email):
-    return False
+    """
+    Set the pending status for a given email in the data dictionary and save it to a JSON file.
+
+    Args:
+        email (str): The email address of the user.
+
+    Returns:
+        None
+    """
+    data = get_data()
+    data[email]['Pending'] = True
+
+    with open('data.json', 'w') as file:
+        json.dump(data, file)
 
 # This function checks the database to see if two people are pending, and if they are, assigns them to each other
 def assign():
