@@ -4,6 +4,15 @@ import json
 class MongoDBManager:
     
     def __init__(self):
+        """
+        Initializes a MongoDBManager object.
+
+        Parameters:
+        None
+
+        Returns:
+        None
+        """
         self.url = "https://us-east-1.aws.data.mongodb-api.com/app/data-ungvu/endpoint/data/v1/action"
         self.headers = {
             'Content-Type': 'application/json',
@@ -15,7 +24,15 @@ class MongoDBManager:
         self.data_source = "Cluster0"
 
     def write(self, data):
-        # Update the document with the specified insertedId
+        """
+        Writes the specified data to the MongoDB collection.
+
+        Args:
+            data: The data to be written.
+
+        Returns:
+            The JSON response from the MongoDB server.
+        """
         payload = json.dumps({
             "collection": self.collection_name,
             "database": self.database_name,
@@ -27,16 +44,19 @@ class MongoDBManager:
         return response.json()
 
     def read(self):
-        # Read a specific document from the collection using its insertedId
-        payload = json.dumps({
-            "collection": self.collection_name,
-            "database": self.database_name,
-            "dataSource": self.data_source,
-            "filter": {"_id": {"$oid": "65655325e4b7353a268caf89"}}
-        })
-        response = requests.request("POST", self.url + "/findOne", headers=self.headers, data=payload)
-        # remove the _id field from inside 'document'
-        document = response.json()['document']
-        document.pop('_id')
-        return document
+            """
+            Read a specific document from the collection using its insertedId.
 
+            Returns:
+                dict: The document retrieved from the collection.
+            """
+            payload = json.dumps({
+                "collection": self.collection_name,
+                "database": self.database_name,
+                "dataSource": self.data_source,
+                "filter": {"_id": {"$oid": "65655325e4b7353a268caf89"}}
+            })
+            response = requests.request("POST", self.url + "/findOne", headers=self.headers, data=payload)
+            document = response.json()['document']
+            document.pop('_id')
+            return document
