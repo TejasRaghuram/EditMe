@@ -1,7 +1,6 @@
 import json
 from MongoDBManager import MongoDBManager
 
-# TODO: Fix Assign Error
 
 MongoDB = MongoDBManager()
 
