@@ -5,17 +5,15 @@ essay = "essay"
 state = "state"
 
 index = f"""
-<| |text|class_name=background|>
+<|Welcome to EditMe!|text|class_name=text|>
 
-<|Welcome to EditMe!|text|>
+<|Your Essay:|text|class_name=text|>
 
-<|Your Essay:|text|>
+<|{prompt}|text|class_name=text|>
 
-<|{prompt}|text|>
+<|{essay}|text|class_name=text|> 
 
-<|{essay}|text|> 
-
-<|{state}|text|>
+<|{state}|text|class_name=text|>
 
 <|Edit Essay|button|>
 """
@@ -35,4 +33,11 @@ pages = {
     'login': login,
 }   
 
-Gui(pages=pages, css_file="./styles.css").run(dark_mode=True)
+custom_theme = {
+  "palette": {
+    "background": {"default": "#becdf0"},
+    "primary": {"main": "#324164"}
+  }
+}
+
+Gui(pages=pages, css_file="./styles.css").run(theme=custom_theme)

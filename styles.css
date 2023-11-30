@@ -1,8 +1,5 @@
-.background {
-    width: 100vw;
-    height: 100vh;
-    background: rgb(240, 130, 110);
-    position: fixed;
-    top: 0;
-    left: 0;
+.text {
+    width: 500px;
+    text-align: center;
+    color: rgb(50, 65, 100);
 }
