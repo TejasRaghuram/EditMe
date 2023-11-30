@@ -1,7 +1,7 @@
 from taipy import Gui
 
 index = """
-# This is the home page
+# Welcome to EditMe!
 """
 
 register = """
