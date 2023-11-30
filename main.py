@@ -1,7 +1,14 @@
 from taipy import Gui
 
-index = """
+prompt = ""
+essay = ""
+
+index = f"""
 # Welcome to EditMe!
+
+## Your Essay:
+**{prompt}**
+{essay}
 """
 
 register = """
