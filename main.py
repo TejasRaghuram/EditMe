@@ -2,19 +2,22 @@ from taipy import Gui
 
 prompt = "prompt"
 essay = "essay"
-status = "status"
+state = "state"
 
 index = f"""
-# Welcome to EditMe!
+<|Welcome to EditMe!|text|>
 
-## Your Essay:
-**{prompt}**
-<br />
-{essay} 
+<|Your Essay:|text|>
 
-## {status}
+<|{prompt}|text|>
+
+<|{essay}|text|> 
+
+<|{state}|text|>
+
 <|Edit Essay|button|>
 """
+
 
 register = """
 # This is the register page
