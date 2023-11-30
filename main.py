@@ -13,6 +13,7 @@ index = f"""
 {essay} 
 
 ## {status}
+<|Edit Essay|button|>
 """
 
 register = """
