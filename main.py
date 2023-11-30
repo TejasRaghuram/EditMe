@@ -1,14 +1,18 @@
 from taipy import Gui
 
-prompt = ""
-essay = ""
+prompt = "prompt"
+essay = "essay"
+status = "status"
 
 index = f"""
 # Welcome to EditMe!
 
 ## Your Essay:
 **{prompt}**
-{essay}
+<br />
+{essay} 
+
+## {status}
 """
 
 register = """
