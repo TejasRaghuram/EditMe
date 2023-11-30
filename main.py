@@ -5,6 +5,8 @@ essay = "essay"
 state = "state"
 
 index = f"""
+<| |text|class_name=background|>
+
 <|Welcome to EditMe!|text|>
 
 <|Your Essay:|text|>
