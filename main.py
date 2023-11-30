@@ -15,7 +15,7 @@ index = f"""
 
 <|{state}|text|class_name=text subtitle|>
 
-<|Edit Essay|button|>
+<|Edit Essay|button|class_name=button|>
 """
 
 
