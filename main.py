@@ -5,15 +5,15 @@ essay = "essay"
 state = "state"
 
 index = f"""
-<|Welcome to EditMe!|text|class_name=text|>
+<|Welcome to EditMe!|text|class_name=text title|>
 
-<|Your Essay:|text|class_name=text|>
+<|Your Essay:|text|class_name=text subtitle|>
 
-<|{prompt}|text|class_name=text|>
+<|{prompt}|text|class_name=text bold|>
 
-<|{essay}|text|class_name=text|> 
+<|{essay}|text|class_name=text regular|> 
 
-<|{state}|text|class_name=text|>
+<|{state}|text|class_name=text subtitle|>
 
 <|Edit Essay|button|>
 """
