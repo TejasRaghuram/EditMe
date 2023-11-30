@@ -1,5 +1,5 @@
 .text {
-    width: 500px;
     text-align: center;
     color: rgb(50, 65, 100);
+    display: block;
 }
